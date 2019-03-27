@@ -1,0 +1,116 @@
+
+.esriAttribution {
+	font-size: 13px;
+	line-height: 15px;
+	color: #323232;
+	display: none;
+	text-align: left;
+	vertical-align: bottom;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	padding: 0 4px;
+	margin: 0 5px 0 0;
+	background: rgba(255, 255, 255, 0.7);
+	background: repeat left top url(../images/map/70-percent-white.png)\9;
+}
+
+#showRiver {
+	position: absolute;
+	top: 10px;
+	right: 8px;
+	width: 24px;
+	height: 24px;
+	z-index: 1500;
+	background-size: 24px;
+	background-image: url(../img/filter.png);
+	background-color: #00AEEF;
+	border: 0px;
+}
+
+.mui-bar {
+	position: fixed;
+	z-index: 10;
+	right: 0;
+	left: 0;
+	height: 44px;
+	padding-right: 10px;
+	padding-left: 10px;
+	border-bottom: 0;
+	background-color: #00AEEF;
+	-webkit-box-shadow: 0 0 1px rgba(0, 0, 0, .85);
+	box-shadow: 0 0 1px rgba(0, 0, 0, .85);
+	-webkit-backloadInitface-visibility: hidden;
+	backface-visibility: hidden;
+}
+
+a {
+	color: white;
+}
+
+#inputDiv {
+	position: fixed;
+	z-index: 10;
+	right: 0;
+	left: 10px;
+	top: 50px;
+	height: auto;
+	width: calc(100% - 20px);
+	max-width: 394px;
+	border-bottom: 0;
+	-webkit-box-shadow: 0 0 1px rgba(0, 0, 0, .85);
+	box-shadow: 0 0 1px red;
+	-webkit-backloadInitface-visibility: hidden;
+	backface-visibility: hidden;
+}
+
+input {
+	color: #000;
+}
+
+
+
+.title.content {
+	margin: 10px 15px 35px;
+	color: #bbb;
+	text-indent: 1em;
+	font-size: 14px;
+	line-height: 24px;
+}
+
+.box {
+	position: absolute;
+	width: 300px;
+	height: 200px;
+	/*border: 1px solid gray;*/
+}
+
+#pop {
+	position: absolute;
+	margin-top: 2px;
+	width: 100%;
+	height: 200px;
+	border: 1px solid gray;
+	border-top: 0;
+	float: left;
+	overflow: auto;
+	background-color: #fff;
+}
+
+ul {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+ul li {
+	margin-left: 10px;
+	margin-top: 10px;
+	cursor: pointer;
+	height: 30px;
+	line-height: 30px;
+}
+
+ul li:hover {
+	background-color: gray;
+}

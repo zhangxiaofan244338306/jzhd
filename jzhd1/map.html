@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+		<meta name="viewport" content="initial-scale=1, maximum-scale=1,user-scalable=no">
+		<title>map</title>
+
+		<link rel="stylesheet" href="https://js.arcgis.com/3.22/dijit/themes/tundra/tundra.css">
+		<link rel="stylesheet" href="https://js.arcgis.com/3.22/esri/css/esri.css">
+		<link rel="stylesheet" href="css/mui.min.css">
+		<link href="css/mui.picker.css" rel="stylesheet" />
+		<link href="css/mui.poppicker.css" rel="stylesheet" />
+		<link rel="stylesheet" href="css/map.css">
+		<style>
+			html,
+			body,
+			#mapDiv {
+				padding: 0;
+				margin: 0;
+				height: 100%;
+			}
+			
+			#mapDiv {
+				position: relative;
+			}
+			
+			#info {
+				background: #fff;
+				box-shadow: 0 0 5px #888;
+				left: 1em;
+				padding: 0.5em;
+				position: absolute;
+				top: 1em;
+				z-index: 40;
+			}
+		</style>
+		<script type="text/javascript" src="js/jquery.min.1.7.js"></script>
+		<script src="https://js.arcgis.com/3.22/"></script>
+		<script src="js/mui.min.js"></script>
+		<script src="js/mui.picker.js"></script>
+		<script src="js/mui.poppicker.js"></script>
+		<script src="js/map.js"></script>
+		<script>
+			var map, dialog;
+			require([
+				"esri/map", "esri/layers/FeatureLayer",
+				"esri/symbols/SimpleFillSymbol", "esri/symbols/SimpleLineSymbol",
+				"esri/renderers/SimpleRenderer", "esri/graphic", "esri/lang", "esri/dijit/PopupTemplate", "esri/InfoTemplate",
+				"esri/Color", "dojo/number", "dojo/dom-style",
+				"dijit/TooltipDialog", "dijit/popup", "dojo/domReady!"
+			], function(
+				Map, FeatureLayer,
+				SimpleFillSymbol, SimpleLineSymbol,
+				SimpleRenderer, Graphic, esriLang, PopupTemplate, InfoTemplate,
+				Color, number, domStyle,
+				TooltipDialog, dijitPopup
+			) {
+				var options = {logo : false};
+				map = new esri.Map("mapDiv",options);
+				map.enableScrollWheelZoom();
+				map.panUpperRight();
+				var baseLayer = new esri.layers.ArcGISTiledMapServiceLayer("http://192.168.1.166:6080/arcgis/rest/services/JTMAP/JTBaseMap/MapServer");
+				map.addLayer(baseLayer);
+				map.on("load", function() {
+					var objButton = document.getElementById("mapDiv_zoom_slider").style;
+					objButton.visibility = "collapse";
+				});
+				//showLayer(1);
+				(function($, doc) {
+					$.init();
+					$.ready(function() {
+						var riverPicker = new $.PopPicker({
+							layer: 2
+						});
+						riverPicker.setData(river);
+						var showRiverButton = doc.getElementById('showRiver');
+						showRiverButton.addEventListener('tap', function(event) {
+							riverPicker.show(function(items) {
+								showLayer(items[1].text);
+							});
+						}, false);
+
+					});
+				})(mui, document);
+
+				initSearch();
+			});
+		</script>
+	</head>
+
+	<body class="tundra">
+		<div id="inputDiv">
+			<div class="mui-input-row mui-search">
+				<input type="search" class="mui-input-clear" placeholder="搜河道、水库" id="sugtxtgestId">
+			</div>
+		</div>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-back mui-pull-left"></a>
+
+			<h1 class="mui-title" style="color: white;">金坛河道水库全景</h1>
+			<button id='showRiver' type='button'></button>
+		</header>
+		<div id="mapDiv">
+		</div>
+	</body>
+
+</html>
